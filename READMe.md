@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img width="100px" src="./assets/readme/shop.svg">
+    <img width="100px" src="./assets/readme/shop.webp">
   </a>
   <h1 align="center">EcoShop - React Native</h1>  
 </p>
