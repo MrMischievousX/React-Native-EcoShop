@@ -1,0 +1,53 @@
+{
+  "identifier" : "941D2E5C",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "9A905388",
+      "localizations" : [
+        {
+          "description" : "Add 100 Coins to your account.",
+          "displayName" : "100 Coins",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Add 100 coins to your account.",
+          "displayName" : "100 Coins",
+          "locale" : "en_GB"
+        }
+      ],
+      "productID" : "rt_100_0_99",
+      "referenceName" : "100 Coins",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "E895ADE0",
+      "localizations" : [
+        {
+          "description" : "Add 1000 coins to your account.",
+          "displayName" : "1000 Coins",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "rt_1000_9_99",
+      "referenceName" : "1000 Coins",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 1
+  }
+}
