@@ -23,7 +23,7 @@
 
 ### Android
 
-You can download the latest APK [here](https://github.com/MrMischievousX/React-Native-EcoShop).
+You can download the latest APK [here](https://drive.google.com/drive/folders/1W-pR8CvG8rH6bBaObC1DVyB873w9JXcz?usp=sharing).
 
 ### IOs
 
