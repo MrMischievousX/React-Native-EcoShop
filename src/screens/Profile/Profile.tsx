@@ -15,6 +15,7 @@ import {Avatar, Icon} from 'react-native-elements';
 import {Spacer, Option} from '../../components';
 import {options} from '../../constants/dataText';
 import {AppContext} from '../../constants/contextApi';
+import {RemoveCurrentUser} from '../../constants/localRealm';
 
 interface props {
   navigation: any;
@@ -22,6 +23,11 @@ interface props {
 
 const Profile: FC<props> = ({navigation}) => {
   const ctx: any = useContext(AppContext);
+  const remove = async () => {
+    RemoveCurrentUser();
+    navigation.replace('Login');
+  };
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: Colors.darkpink}}>
       {Platform.OS == 'android' && (
@@ -75,9 +81,7 @@ const Profile: FC<props> = ({navigation}) => {
                 iconTitle={item.iconTitle}
                 type={item.type}
                 onPress={() => {
-                  item.fnc
-                    ? navigation.replace(item.path)
-                    : Alert.alert('Work in Progress!!');
+                  item.fnc ? remove() : Alert.alert('Work in Progress!!');
                 }}
                 subText={item.subText ? true : false}
                 last={index != options.length - 1}

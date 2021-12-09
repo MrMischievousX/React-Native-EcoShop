@@ -28,6 +28,7 @@ const App: FC<props> = ({navigation}) => {
 
   const validateUser = async () => {
     const data = await ctx.user.functions.signInUser(email, password);
+    console.log(data);
     if (data) {
       await ctx.dispatchEvent('setCurrentUser', data);
       navigation.navigate('HomeTab');

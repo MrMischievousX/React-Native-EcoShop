@@ -53,7 +53,7 @@ const ProductDetail: FC<props> = ({navigation, route}) => {
       {Platform.OS == 'android' ? (
         <StatusBar barStyle="dark-content" backgroundColor="white" />
       ) : (
-        <View style={{height: width * 0.1, backgroundColor: 'white'}} />
+        <View style={{height: width * 0.06, backgroundColor: 'white'}} />
       )}
       <View style={{backgroundColor: 'white'}}>
         <View

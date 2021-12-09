@@ -43,7 +43,7 @@ const Category: FC<props> = ({navigation, route}) => {
       {Platform.OS == 'android' ? (
         <StatusBar barStyle="dark-content" backgroundColor="white" />
       ) : (
-        <View style={{height: width * 0.1, backgroundColor: 'white'}} />
+        <View style={{height: width * 0.06, backgroundColor: 'white'}} />
       )}
       <View style={{backgroundColor: 'white'}}>
         <View
@@ -107,7 +107,10 @@ const Category: FC<props> = ({navigation, route}) => {
           );
         }}
         data={categoryData}
-        columnWrapperStyle={{justifyContent: 'space-evenly'}}
+        columnWrapperStyle={{
+          justifyContent: 'space-evenly',
+          backgroundColor: 'white',
+        }}
         numColumns={2}
         renderItem={({item, index}: {item: any; index: number}) => {
           return (

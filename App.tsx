@@ -16,10 +16,10 @@ import {Favourite} from './src/screens/Favourite';
 import {Search} from './src/screens/Search';
 import Realm from 'realm';
 import {adminEmail, adminPassword} from './env';
-
+import {getCurrentUser, addCurrentUser} from './src/constants/localRealm';
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigator: FC = () => {
   return (
     <Tab.Navigator
       initialRouteName="HomeStack"
@@ -171,11 +171,13 @@ const MainStack = createStackNavigator();
 const MainStackNavigator = () => {
   const [user, setUser] = useState<any>(null);
   const [currentUser, setCurrentUser] = useState<any>(null);
+  const [load, setLoad] = useState<boolean>(false);
 
   const dispatchEvent = (action: string, payload: any) => {
     switch (action) {
       case 'setCurrentUser':
         setCurrentUser(payload);
+        if (!currentUser) addCurrentUser(payload);
         return;
       default:
         console.log('Default');
@@ -197,17 +199,37 @@ const MainStackNavigator = () => {
     }
   };
 
+  const getCurr = async () => {
+    const curr: any = await getCurrentUser();
+    if (curr.length >= 1) {
+      const data = await user.functions.signInUser(
+        curr[0].email,
+        curr[0].password,
+      );
+      setCurrentUser(data);
+      setLoad(true);
+    } else setLoad(true);
+  };
+
   useEffect(() => {
     getUser();
   }, []);
 
-  if (!user) return null;
+  useEffect(() => {
+    if (user) {
+      getCurr();
+    }
+  }, [user]);
+
+  if (!load) return null;
 
   return (
     <AppContext.Provider value={{user, currentUser, dispatchEvent}}>
       <NavigationContainer>
         <StatusBar barStyle="dark-content" />
-        <MainStack.Navigator screenOptions={{headerShown: false}}>
+        <MainStack.Navigator
+          screenOptions={{headerShown: false}}
+          initialRouteName={currentUser ? 'HomeTab' : 'Login'}>
           <MainStack.Screen name="Login" component={LoginStackNavigator} />
           <MainStack.Screen name="HomeTab" component={TabNavigator} />
           <MainStack.Screen name="ProductDetail" component={ProductDetail} />
