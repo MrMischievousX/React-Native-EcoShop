@@ -25,7 +25,9 @@ const addCurrentUser = async (data: any) => {
 const RemoveCurrentUser = async () => {
   Realm.open(options).then(realm => {
     const user = realm.objects('LocalDb');
-    realm.delete(user);
+    realm.write(() => {
+      realm.delete(user);
+    });
     realm.close();
   });
 };
