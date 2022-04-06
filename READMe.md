@@ -25,7 +25,7 @@
 
 You can download the latest APK [here](https://drive.google.com/drive/folders/1W-pR8CvG8rH6bBaObC1DVyB873w9JXcz?usp=sharinggit).
 
-### IOs
+### IOS
 
 Please clone the repo 🙃🙃🙃
 
@@ -50,7 +50,7 @@ Please clone the repo 🙃🙃🙃
 
 ## Development
 
-```bash
+```js bash
 # Dependencies
 yarn install
 or
