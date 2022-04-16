@@ -29,9 +29,9 @@ const App: FC<props> = ({navigation}) => {
 
   const signUpUser = async () => {
     const data = await ctx.user.functions.SignUpUser({
-      email: email,
-      username: username,
-      password: password,
+      email: email.trim(),
+      username: username.trim(),
+      password: password.trim(),
     });
     if (data) navigation.replace('SignIn');
   };

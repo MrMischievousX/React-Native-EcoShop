@@ -27,7 +27,10 @@ const App: FC<props> = ({navigation}) => {
   const [password, setPassword] = useState<string>('');
 
   const validateUser = async () => {
-    const data = await ctx.user.functions.signInUser(email, password);
+    const data = await ctx.user.functions.signInUser(
+      email.trim(),
+      password.trim(),
+    );
     console.log(data);
     if (data) {
       await ctx.dispatchEvent('setCurrentUser', data);

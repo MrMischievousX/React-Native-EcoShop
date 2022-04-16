@@ -69,3 +69,138 @@ yarn ios
 yarn android
 
 ```
+
+## Serverless functions used
+
+# addFavourite
+
+```js
+exports = function (id, val, isFav) {
+  var collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('UserDB');
+  if (isFav)
+    return collection.updateOne(
+      {_id: BSON.ObjectId(id)},
+      {$pull: {favourite: val}},
+    );
+  else
+    return collection.updateOne(
+      {_id: BSON.ObjectId(id)},
+      {$push: {favourite: val}},
+    );
+};
+```
+
+# getAllProducts
+
+```js
+exports = function (arg = 1) {
+  var collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('Flipkart');
+  const data = collection
+    .find({})
+    .skip(arg * 20)
+    .limit(20)
+    .toArray();
+  return {data: data, pgNo: arg + 1};
+};
+```
+
+# getCategory
+
+```js
+exports = function (arg) {
+  var collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('Flipkart');
+  return collection.distinct('product_category_tree');
+};
+```
+
+# getOneProduct
+
+```js
+exports = function (arg) {
+  var collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('Flipkart');
+  return collection.findOne({_id: BSON.ObjectId(arg)});
+};
+```
+
+# getProductsWithCategory
+
+```js
+exports = function (arg, pgNo) {
+  var collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('Flipkart');
+  const data = collection
+    .find({product_category_tree: {$regex: arg, $options: 'i'}})
+    .skip(pgNo * 20)
+    .limit(20)
+    .toArray();
+  return {data: data, pgNo: pgNo + 1};
+};
+```
+
+# getProductsWithQuery
+
+```js
+exports = function (arg, pgNo) {
+  var collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('Flipkart');
+  const data = collection
+    .find({product_name: {$regex: arg, $options: 'i'}})
+    .skip(pgNo * 20)
+    .limit(20)
+    .toArray();
+  return {data: data, pgNo: pgNo + 1};
+};
+```
+
+# signInUser
+
+```js
+exports = function (arg1, arg2) {
+  const collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('UserDB');
+  const data = collection.findOne({email: arg1, password: arg2});
+  return data;
+};
+```
+
+# SignUpUser
+
+```js
+exports = async function (item) {
+  const collection = context.services
+    .get('mongodb-atlas')
+    .db('EcoShop')
+    .collection('UserDB');
+  return collection
+    .find({$or: [{username: item.username}, {email: item.email}]})
+    .toArray()
+    .then(result => {
+      if (result.length == 0)
+        return collection.insertOne({
+          username: item.username,
+          password: item.password,
+          email: item.email,
+          favourite: [],
+        });
+      else return null;
+    });
+};
+```
