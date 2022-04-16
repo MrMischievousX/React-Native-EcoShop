@@ -56,7 +56,7 @@ yarn install
 or
 npm install
 
-##Firebase
+## MongoDB Realm
 Setup Realm Account
 Import the ecoshop.csv file in mongo db atlas
 Setup Schema and Permissions
