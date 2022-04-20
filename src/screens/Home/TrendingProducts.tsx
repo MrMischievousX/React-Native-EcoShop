@@ -44,15 +44,13 @@ const TrendingProducts: FC<props> = ({navigation}) => {
         }}
         onEndReachedThreshold={0.7}
         ListFooterComponent={() => {
-          return (
-            pgNo < 50 && (
-              <ActivityIndicator
-                style={{marginTop: height * 0.01}}
-                size="large"
-                color={Colors.darkpink}
-              />
-            )
-          );
+          return pgNo < 50 ? (
+            <ActivityIndicator
+              style={{marginTop: height * 0.01}}
+              size="large"
+              color={Colors.darkpink}
+            />
+          ) : null;
         }}
         data={products}
         columnWrapperStyle={{justifyContent: 'space-evenly'}}

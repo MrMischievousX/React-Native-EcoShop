@@ -21,15 +21,18 @@ interface props {
 }
 
 const ProductDetail: FC<props> = ({navigation, route}) => {
-  const {item} = route.params;
+  const {retail_price, description, image, discounted_price, product_name} =
+    route.params;
   const ctx: any = useContext(AppContext);
 
-  const isFav = ctx.currentUser.favourite.find((e: string) => e == item._id);
+  const _id = '123';
+
+  const isFav = ctx.currentUser.favourite.find((e: string) => e == _id);
 
   const Fav = async () => {
     await ctx.user.functions.addFavourite(
       ctx.currentUser._id.toString(),
-      item._id.toString(),
+      _id.toString(),
       isFav,
     );
     const data = await ctx.user.functions.signInUser(
@@ -42,7 +45,7 @@ const ProductDetail: FC<props> = ({navigation, route}) => {
   };
 
   const arr = new Array();
-  const rate = item.retail_price % 5;
+  const rate = retail_price % 5;
   for (let i = 1; i <= 5; i++) {
     if (i <= Math.ceil(rate)) arr.push(1);
     else arr.push(0);
@@ -106,7 +109,7 @@ const ProductDetail: FC<props> = ({navigation, route}) => {
           }}>
           <ImageBackground
             source={{
-              uri: item.image[0],
+              uri: image[0],
             }}
             resizeMode="contain"
             style={{
@@ -128,7 +131,7 @@ const ProductDetail: FC<props> = ({navigation, route}) => {
         </View>
 
         <View style={{marginHorizontal: width * 0.05}}>
-          <Text style={styles.title}>{item.product_name}</Text>
+          <Text style={styles.title}>{product_name}</Text>
           <View style={styles.rating}>
             {arr.map((item, index) => {
               return (
@@ -145,13 +148,11 @@ const ProductDetail: FC<props> = ({navigation, route}) => {
             })}
           </View>
           <View style={{flexDirection: 'row'}}>
-            <Text style={styles.price}>{`Rs : ${item.retail_price}`}</Text>
+            <Text style={styles.price}>{`Rs : ${retail_price}`}</Text>
             <Text
-              style={
-                styles.discountPrice
-              }>{`Rs : ${item.discounted_price}`}</Text>
+              style={styles.discountPrice}>{`Rs : ${discounted_price}`}</Text>
           </View>
-          <Text style={styles.description}>{item.description}</Text>
+          <Text style={styles.description}>{description}</Text>
         </View>
         <Spacer height={height * 0.1} />
       </ScrollView>

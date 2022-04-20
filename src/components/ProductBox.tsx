@@ -43,7 +43,12 @@ const ProductBox: FC<props> = ({item, navigation}) => {
         activeOpacity={0.6}
         onPress={() =>
           navigation.navigate('ProductDetail', {
-            item: item,
+            image: item.image,
+            _id: item._id.toString(),
+            product_name: item.product_name,
+            retail_price: item.retail_price,
+            discounted_price: item.discounted_price,
+            description: item.description,
           })
         }>
         <ImageBackground
